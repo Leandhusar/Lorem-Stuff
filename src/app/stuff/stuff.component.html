@@ -1,0 +1,31 @@
+<section>
+    <div>
+        <p>Filters: </p>
+        <select [(ngModel)]="selectedCategory" (change)="applyFilters()">
+            <option value="All Categories">All Categories</option>
+            <option *ngFor="let category of categories">
+              {{category["name"] | titlecase}}
+            </option>
+        </select>
+        <select [(ngModel)]="selectedPriceComparison" (change)="applyFilters()">
+            <option value="0">Any Price</option>
+            <option value="1">&gt; 30000</option>
+            <option value="2">&lt; 10000</option>
+        </select>
+        <select [(ngModel)]="selectedAvailability" (change)="applyFilters()">
+            <option value="0">Any Product</option>
+            <option value="1">Available</option>
+            <option value="2">Best Sellers</option>
+            <option value="3">Sold Out</option>
+        </select>
+    </div>
+</section>
+
+<section *ngIf="renderCategories && renderProducts">
+    <div *ngFor="let product of filterAppliedStuff">
+        <img src="{{product['img']}}">
+        <p class="name">{{product["name"]}}</p>
+        <p class="description">{{product["description"]}}</p>
+        <p class="price">Price: {{product["price"]}}</p>
+    </div>
+</section>
