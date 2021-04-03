@@ -19,6 +19,16 @@
             <option value="3">Sold Out</option>
         </select>
     </div>
+    
+    <div>
+        <p>Sort By:</p>
+        <select [(ngModel)]="selectedSortMethod" (change)="sortStuff()">
+            <option value="0">None</option>
+            <option value="1">Lowest Price</option>
+            <option value="2">Higher Price</option>
+            <option value="3">Name</option>
+        </select>
+    </div>
 </section>
 
 <section *ngIf="renderCategories && renderProducts">
