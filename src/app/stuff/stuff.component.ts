@@ -28,6 +28,9 @@ export class StuffComponent implements OnInit {
 
   filterAppliedStuff: any = [];
 
+  shoppingCartProducts: any = [];
+  showCart: boolean = false;
+
   /**
    * Se utiliza el servicio para leer el archivo de datos para
    * cargar las categorias y los productos. En los productos se crea una variable para guardar todos los productos
@@ -161,6 +164,23 @@ export class StuffComponent implements OnInit {
         return 0;
       });
     }
+  }
+
+  addToShoppingCart(product: any){
+    this.shoppingCartProducts.push(product);
+  }
+
+  dropFromCart(product: any){
+    let index = this.shoppingCartProducts.indexOf(product);
+    this.shoppingCartProducts.splice(index, 1);
+  }
+
+  openCart(){
+    this.showCart = true;
+  }
+
+  closeCart(){
+    this.showCart = false;
   }
 
 }

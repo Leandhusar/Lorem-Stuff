@@ -1,4 +1,7 @@
-<section>
+<section class="filters_and_sorting">
+    <div>
+        <button (click)="openCart()" class="open_cart_btn">Open Cart</button>
+    </div>
     <div>
         <p>Filters: </p>
         <select [(ngModel)]="selectedCategory" (change)="applyFilters()">
@@ -19,7 +22,6 @@
             <option value="3">Sold Out</option>
         </select>
     </div>
-    
     <div>
         <p>Sort By:</p>
         <select [(ngModel)]="selectedSortMethod" (change)="sortStuff()">
@@ -31,11 +33,23 @@
     </div>
 </section>
 
-<section *ngIf="renderCategories && renderProducts">
+<section class="stuff" *ngIf="renderCategories && renderProducts">
     <div *ngFor="let product of filterAppliedStuff">
         <img src="{{product['img']}}">
-        <p class="name">{{product["name"]}}</p>
+        <p class="name">{{product["name"] | titlecase}}</p>
+        <p class="description">{{product["description"]}}</p>
+        <p class="price">&#36;{{product["price"]}}</p>
+        <button (click)="addToShoppingCart(product)">Add To Cart</button>
+    </div>
+</section>
+
+<section class="shopping_cart" id="Modal" *ngIf="showCart">
+    <div *ngFor="let product of shoppingCartProducts" id="Modal">
+        <img src="{{product['img']}}">
+        <p class="name">{{product["name"] | titlecase}}</p>
         <p class="description">{{product["description"]}}</p>
         <p class="price">Price: {{product["price"]}}</p>
+        <button (click)="dropFromCart(product)">Drop From Cart</button>
     </div>
+    <button (click)="closeCart()" class="close_cart_btn">Close</button>
 </section>
